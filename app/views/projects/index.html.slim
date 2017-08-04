@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th Title
+      th[colspan="3"] Actions
+  tbody
+    - @owned_projects.each do |op|
+      tr
+        td = op.title
+        td = link_to 'Show', op
+        td = link_to 'Edit', edit_project_path(op)
+        td = link_to 'Delete', p, method: :delete

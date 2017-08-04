@@ -1,0 +1,29 @@
+.container 
+  .half-centered.details
+    h1 View Project
+    hr
+    table
+      tr
+        th Title
+        td = @project.title
+      - if @project.start_date.present?
+        tr
+          th Start Date
+          td = @project.start_date
+      tr
+        th Project Token
+        td = @project.token
+
+.container
+  .half-centered.details
+    h1 Access List
+    table
+      thead
+        tr
+          th Email
+          th Access Level
+      tbody
+        - @project.project_users.each do |pu|
+          tr
+            td = pu.user.email
+            td = pu.access_level

@@ -4,9 +4,16 @@
 
 @import "bourbon";
 @import "neat";
+@import "grid_settings";
 
 @import "base/base";
 @import "refills/flashes";
+
+@import 'projects';
+
+.container {
+  padding-top: 10px;
+}
 
 .topnav {
   background-color: #333;
