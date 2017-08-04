@@ -5,9 +5,30 @@ $neat-grid: (
 
 .container {
   @include grid-container;
+  margin: 15px;
 }
 
 .half-centered {
   @include grid-column(8);
   @include grid-push(2);
+}
+
+.five-columns {
+  @include grid-column(5);
+}
+
+.four-columns {
+  @include grid-column(4);
+}
+
+.three-columns {
+  @include grid-column(3);
+}
+
+.two-columns {
+  @include grid-column(2);
+}
+
+.one-column {
+  @include grid-column(1);
 }

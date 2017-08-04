@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_many :project_users
   has_many :projects, through: :project_users
   has_many :tasks, foreign_key: 'assignee_id'
+
+  validates :email, email: true
 end

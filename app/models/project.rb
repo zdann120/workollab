@@ -11,6 +11,12 @@ class Project < ApplicationRecord
 
   after_create :add_owner_to_user_list  
 
+  typed_store :settings, coder: DumbCoder do |s|
+    s.boolean :enabled, default: true, null: false
+    s.string :timezone, default: 'America/Phoenix', null: false
+    s.boolean :collaborators_can_add_users, default: false, null: false
+  end
+
   private
 
   def add_owner_to_user_list

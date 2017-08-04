@@ -11,6 +11,9 @@ require "sprockets/railtie"
 Bundler.require(*Rails.groups)
 module Workollab
   class Application < Rails::Application
+    
+    config.autoload_paths << "#{Rails.root}/lib"
+
     config.assets.quiet = true
     config.generators do |generate|
       generate.helper false

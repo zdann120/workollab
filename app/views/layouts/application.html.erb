@@ -18,8 +18,10 @@
     <%= render 'nav_contents' %>
   </div>
   <%= render "flashes" -%>
-  <%= yield %>
-  <%= render "javascript" %>
-  <%= render "css_overrides" %>
+  <div class="container">
+    <%= yield %>
+    <%= render "javascript" %>
+    <%= render "css_overrides" %>
+  </div>
 </body>
 </html>
