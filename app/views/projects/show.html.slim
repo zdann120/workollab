@@ -29,7 +29,8 @@
         - @project.tasks.each do |task|
           tr
             td = task.complete? ? 'Done!' : 'Incomplete'
-            td = task.description
+            td = link_to task.description, edit_project_task_path(@project,
+              task)
             td = task.assignee.email
     = button_to 'Add Task', new_project_task_path(@project), method: :get
 

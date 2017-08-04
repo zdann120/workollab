@@ -7,11 +7,13 @@ class Project::TasksController < ApplicationController
 
   def new
     @task = @project.tasks.new
+    authorize [:project, @task]
   end
 
   def create
     @task = @project.tasks.new(task_params)
-    
+    authorize [:project, @task]
+
     if @task.save!
       redirect_to @project, notice: 'Task has been added!'
     else
@@ -20,6 +22,16 @@ class Project::TasksController < ApplicationController
   end
 
   def edit
+    authorize [:project, @task]
+  end
+
+  def update
+    authorize [:project, @task]
+    if @task.update!(task_params)
+      redirect_to @project, notice: 'Task updated.'
+    else
+      render :edit
+    end
   end
 
   private

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :projects do
-    resources :tasks, except: [:index, :destroy],
+    resources :tasks, 
       controller: 'project/tasks'
   end
 
