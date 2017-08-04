@@ -1,0 +1,13 @@
+.container
+  .half-centered
+    = form_with model: @project, local: true do |f|
+      = f.label :title
+      = f.text_field :title
+
+      = f.label :description
+      = f.text_area :description
+
+      = f.label :start_date
+      = f.date_select :start_date
+
+      = f.submit
