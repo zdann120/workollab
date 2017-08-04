@@ -1,0 +1,13 @@
+h1 Project::Settings#edit
+= form_with model: @project, url: project_settings_path(@project),
+  local: true, method: :patch do |f|
+  = f.label :timezone
+  = f.text_field :timezone
+
+  = f.label :enabled
+  = f.check_box :enabled
+
+  = f.label :collaborators_can_add_users
+  = f.check_box :collaborators_can_add_users
+  hr
+  = f.submit 'Change Settings'
