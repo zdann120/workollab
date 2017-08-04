@@ -53,11 +53,23 @@ class ProjectsController < ApplicationController
     @project = Project.find params[:project_id]
     @outcome = Projects::AddUser.run(user_params)
 
-    if @outcome.valid?
-      redirect_to @project, notice: 'User added!'
-    else
-      flash.now.alert = 'One or more errors prevented this user from being added.'
-      render :show
+    respond_to do |format|
+      format.html do
+        if @outcome.valid?
+          redirect_to @project, notice: 'User added!'
+        else
+          flash.now.alert = 'One or more errors prevented this user from being added.'
+          render :show
+        end
+      end
+
+      format.js do
+        if @outcome.valid?
+          render :show
+        else
+          render :new
+        end
+      end
     end
   end
 

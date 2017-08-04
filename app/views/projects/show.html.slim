@@ -15,6 +15,11 @@
       tr
         th Description
         td = @project.description
+      - if @project.owner == current_user
+        tr
+          th
+          td = link_to 'Change Project Settings',
+          edit_project_settings_path(@project)
 
 .container
   .half-centered.details
@@ -49,7 +54,7 @@
   .container
     .half-centered.details
       h1 Access List
-      table
+      table.access_list
         thead
           tr
             th Email
@@ -61,8 +66,8 @@
               td = pu.access_level
       hr
       h3 Add User
-      = form_with scope: :user, url: project_add_user_path(@project),
-        local: true do |f|
+      = form_with scope: :user, url: project_add_user_path(@project)\
+          do |f|
         = f.label :email
         = f.text_field :email
 
