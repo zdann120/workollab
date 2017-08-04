@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :task do
+    assignee_id 1
+    description "MyString"
+    complete false
+  end
   factory :project_user do
     project nil
     user nil

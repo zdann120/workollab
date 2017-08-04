@@ -1,7 +1,6 @@
 .container 
   .half-centered.details
     h1 View Project
-    hr
     table
       tr
         th Title
@@ -13,6 +12,26 @@
       tr
         th Project Token
         td = @project.token
+      tr
+        th Description
+        td = @project.description
+
+.container
+  .half-centered.details
+    h1 Tasks
+    table
+      thead
+        tr
+          th
+          th Description
+          th Assignee
+      tbody
+        - @project.tasks.each do |task|
+          tr
+            td = task.complete? ? 'Done!' : 'Incomplete'
+            td = task.description
+            td = task.assignee.email
+    = button_to 'Add Task', new_project_task_path(@project), method: :get
 
 .container
   .half-centered.details

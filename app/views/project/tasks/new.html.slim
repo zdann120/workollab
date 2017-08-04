@@ -1,0 +1,5 @@
+.container
+  .half-centered
+    h1 Add Task &mdash; <em>#{@project.title}</em>
+
+    = render 'form', url: project_tasks_path(@project)

@@ -72,3 +72,4 @@ gem 'refills', group: [:development, :test]
 
 gem 'devise', github: 'plataformatec/devise'
 gem 'slim-rails'
+gem 'pundit'

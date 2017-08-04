@@ -1,10 +1,13 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @owned_projects = current_user.owned_projects
   end
 
   def show
     @project = Project.find params[:id]
+    authorize @project
   end
 
   def new
@@ -34,6 +37,15 @@ class ProjectsController < ApplicationController
     else
       flash.now.alert = 'One or more errors prevented this project from being updated. Please try again.'
       render :edit
+    end
+  end
+
+  def destroy
+    @project = Project.find params[:id]
+    if @project.destroy
+      redirect_to projects_url, notice: "Project [ID: #{@project.id}] has been deleted."
+    else
+      redirect_to @project, alert: 'This project could not be deleted.'
     end
   end
 
