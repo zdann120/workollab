@@ -21,7 +21,7 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "skylight"
 gem "sprockets", ">= 3.0.0"
-gem "suspenders"
+gem "suspenders", group: :development
 gem "title"
 gem "uglifier"
 
