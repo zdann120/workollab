@@ -8,6 +8,6 @@ $neat-grid: (
 }
 
 .half-centered {
-  @include grid-column(6);
-  @include grid-push(3);
+  @include grid-column(8);
+  @include grid-push(2);
 }

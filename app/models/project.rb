@@ -7,6 +7,8 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
   has_many :tasks
 
+  validates :title, presence: true
+
   after_create :add_owner_to_user_list  
 
   private

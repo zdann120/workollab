@@ -26,7 +26,7 @@
           th Description
           th Assignee
       tbody
-        - @project.tasks.each do |task|
+        - @project.tasks.includes(:assignee).each do |task|
           tr
             - if task.complete?
               td
@@ -63,8 +63,8 @@
       h3 Add User
       = form_with scope: :user, url: project_add_user_path(@project),
         local: true do |f|
-        = f.label :user_id, 'User'
-        = f.collection_select :user_id, User.all - @project.users, :id, :email
+        = f.label :email
+        = f.text_field :email
 
         = f.label :access_level
         = f.select :access_level, ProjectUser.access_levels.keys

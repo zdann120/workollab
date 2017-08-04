@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find params[:id]
+    @project = Project.includes(:owner).find(params[:id])
     authorize @project
   end
 
@@ -51,10 +51,12 @@ class ProjectsController < ApplicationController
 
   def add_user
     @project = Project.find params[:project_id]
+    @outcome = Projects::AddUser.run(user_params)
 
-    if @project.project_users.create!(user_params)
+    if @outcome.valid?
       redirect_to @project, notice: 'User added!'
     else
+      flash.now.alert = 'One or more errors prevented this user from being added.'
       render :show
     end
   end
@@ -66,6 +68,6 @@ class ProjectsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:user_id, :access_level)
+    params.require(:user).permit(:access_level, :email).merge!({project: @project})
   end
 end
