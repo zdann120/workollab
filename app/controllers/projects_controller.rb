@@ -49,9 +49,23 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def add_user
+    @project = Project.find params[:project_id]
+
+    if @project.project_users.create!(user_params)
+      redirect_to @project, notice: 'User added!'
+    else
+      render :show
+    end
+  end
+
   private
 
   def project_params
     params.require(:project).permit(:title, :description, :start_date)
+  end
+
+  def user_params
+    params.require(:user).permit(:user_id, :access_level)
   end
 end

@@ -1,6 +1,6 @@
 class Project::TasksController < ApplicationController
   before_action :set_project
-  before_action :set_task, only: [:show, :edit, :update]
+  before_action :set_task, only: [:show, :edit, :update, :change_status]
   def show
 
   end
@@ -32,6 +32,15 @@ class Project::TasksController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def change_status
+    if @task.complete?
+      @task.update(complete: false)
+    else
+      @task.update(complete: true)
+    end
+    redirect_to @project
   end
 
   private

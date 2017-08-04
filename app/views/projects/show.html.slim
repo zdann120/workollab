@@ -28,22 +28,45 @@
       tbody
         - @project.tasks.each do |task|
           tr
-            td = task.complete? ? 'Done!' : 'Incomplete'
-            td = link_to task.description, edit_project_task_path(@project,
-              task)
+            - if task.complete?
+              td
+                = link_to 'Complete', 
+                  change_status_project_task_path(@project, task),
+                  method: :patch
+            - else
+
+
+              td
+                = link_to 'Incomplete', 
+                  change_status_project_task_path(@project, task),
+                  method: :patch
+            td = task.description
+
             td = task.assignee.email
     = button_to 'Add Task', new_project_task_path(@project), method: :get
 
-.container
-  .half-centered.details
-    h1 Access List
-    table
-      thead
-        tr
-          th Email
-          th Access Level
-      tbody
-        - @project.project_users.each do |pu|
+- if current_user == @project.owner
+  .container
+    .half-centered.details
+      h1 Access List
+      table
+        thead
           tr
-            td = pu.user.email
-            td = pu.access_level
+            th Email
+            th Access Level
+        tbody
+          - @project.project_users.each do |pu|
+            tr
+              td = pu.user.email
+              td = pu.access_level
+      hr
+      h3 Add User
+      = form_with scope: :user, url: project_add_user_path(@project),
+        local: true do |f|
+        = f.label :user_id, 'User'
+        = f.collection_select :user_id, User.all - @project.users, :id, :email
+
+        = f.label :access_level
+        = f.select :access_level, ProjectUser.access_levels.keys
+
+        = f.submit 'Add User'

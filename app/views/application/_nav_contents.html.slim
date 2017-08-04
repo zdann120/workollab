@@ -1,5 +1,6 @@
 .topnav
-  = link_to 'Home', root_path
-  = link_to 'Sign in', new_user_session_path if !current_user
-  = link_to 'Sign out', destroy_user_session_path,
+  = active_link_to 'Home', root_path, active: :exact
+  = active_link_to 'Projects', projects_path
+  = active_link_to 'Sign in', new_user_session_path if !current_user
+  = active_link_to 'Sign out', destroy_user_session_path,
     method: :delete if current_user
